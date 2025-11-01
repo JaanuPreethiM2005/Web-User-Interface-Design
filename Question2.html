@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .dark-theme {
+            background-color: #343a40;
+            color: white;
+        }
+        .progress {
+            height: 20px;
+        }
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="d-flex justify-content-between align-items-center dashboard-header p-3">
+            <h1>Employee Performance Dashboard</h1>
+            <button id="theme-switcher" class="btn btn-secondary">Switch to Dark Theme</button>
+        </header>
+        <section class="row mt-4">
+            <div class="col-md-6">
+                <h2>Performance Metrics</h2>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Employee A</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Employee B</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>Filter Data</h2>
+                <input type="text" id="filter-input" class="form-control" placeholder="Filter by name...">
+                <ul id="employee-list" class="list-group mt-3">
+                    <li class="list-group-item">Employee A</li>
+                    <li class="list-group-item">Employee B</li>
+                    <li class="list-group-item">Employee C</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Theme switching functionality
+            $('#theme-switcher').click(function() {
+                $('body').toggleClass('dark-theme');
+                $(this).text($(this).text() === 'Switch to Dark Theme' ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+            });
+
+            // Filter functionality
+            $('#filter-input').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('#employee-list li').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
