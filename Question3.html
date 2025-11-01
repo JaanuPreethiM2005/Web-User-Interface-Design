@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking Webpage</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .destination-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .destination-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .search-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x900/?travel');
+            background-size: cover;
+            color: white;
+            padding: 50px 0;
+            margin-bottom: 30px;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #destinationDetails {
+            display: none;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .destination-card img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h1 class="text-center mb-4">Book Your Next Adventure</h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-container">
+                        <form id="travelForm">
+                            <div class="mb-3">
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" class="form-control" id="destination" list="destinations" placeholder="Search destinations..." autocomplete="on">
+                                <datalist id="destinations">
+                                    <option value="Paris">
+                                    <option value="New York">
+                                    <option value="Tokyo">
+                                    <option value="Sydney">
+                                    <option value="Rome">
+                                </datalist>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="startDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="endDate" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="endDate">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="budget" class="form-label">Budget Range ($)</label>
+                                <input type="range" class="form-range" min="100" max="5000" step="100" id="budget" value="1000">
+                                <span id="budgetValue">$1000</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="container my-5" id="destinationsSection">
+        <h2 class="text-center mb-4">Popular Destinations</h2>
+        <div class="row" id="destinationsRow">
+            <!-- Destination cards will be loaded here dynamically -->
+        </div>
+    </section>
+
+    <!-- Destination Details Modal -->
+    <div class="modal fade" id="destinationModal" tabindex="-1" aria-labelledby="destinationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationModalLabel">Destination Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="destinationDetails">
+                    <!-- Details loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="bookNow">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Confirm Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your booking for <span id="bookingDestination"></span> has been confirmed!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample destination data
+        const destinations = [
+            { name: "Paris", image: "https://source.unsplash.com/random/600x400/?paris", description: "The City of Light, famous for the Eiffel Tower and Louvre Museum.", price: "$1200" },
+            { name: "New York", image: "https://source.unsplash.com/random/600x400/?newyork", description: "The Big Apple, known for Times Square and Central Park.", price: "$1500" },
+            { name: "Tokyo", image: "https://source.unsplash.com/random/600x400/?tokyo", description: "A vibrant city with a mix of tradition and modernity.", price: "$1800" },
+            { name: "Sydney", image: "https://source.unsplash.com/random/600x400/?sydney", description: "Famous for the Opera House and beautiful beaches.", price: "$2000" },
+            { name: "Rome", image: "https://source.unsplash.com/random/600x400/?rome", description: "The Eternal City, home to the Colosseum and Vatican.", price: "$1300" }
+        ];
+
+        // Load destinations on page load
+        $(document).ready(function() {
+            loadDestinations(destinations);
+            // Smooth scrolling for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 500);
+            });
+        });
+
+        // Load destinations dynamically
+        function loadDestinations(dests) {
+            const row = $('#destinationsRow');
+            row.empty();
+            dests.forEach(dest => {
+                row.append(`
+                    <div class="col-md-4">
+                        <div class="card destination-card">
+                            <img src="${dest.image}" class="card-img-top" alt="${dest.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${dest.name}</h5>
+                                <p class="card-text">${dest.description}</p>
+                                <p class="card-text"><strong>Price:</strong> ${dest.price}</p>
+                                <button class="btn btn-info view-details" data-bs-toggle="modal" data-bs-target="#destinationModal" data-destination='${JSON.stringify(dest)}'>View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        // Handle form submission
+        $('#travelForm').submit(function(e) {
+            e.preventDefault();
+            const destination = $('#destination').val().toLowerCase();
+            const startDate = $('#startDate').val();
+            const endDate = $('#endDate').val();
+            const budget = $('#budget').val();
+
+            if (!destination || !startDate || !endDate) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const filtered = destinations.filter(dest =>
+                dest.name.toLowerCase().includes(destination) &&
+                dest.price.replace(/\$/g, '') <= budget
+            );
+
+            loadDestinations(filtered.length ? filtered : destinations);
+            $('html, body').animate({
+                scrollTop: $('#destinationsSection').offset().top
+            }, 500);
+        });
+
+        // Update budget value display
+        $('#budget').on('input', function() {
+            $('#budgetValue').text('$' + $(this).val());
+        });
+
+        // Handle view details button click
+        $(document).on('click', '.view-details', function() {
+            const dest = JSON.parse($(this).data('destination'));
+            $('#destinationDetails').html(`
+                <img src="${dest.image}" class="img-fluid mb-3" alt="${dest.name}">
+                <h5>${dest.name}</h5>
+                <p>${dest.description}</p>
+                <p><strong>Price:</strong> ${dest.price}</p>
+            `);
+            $('#bookingDestination').text(dest.name);
+        });
+
+        // Handle book now button click
+        $('#bookNow').click(function() {
+            $('#destinationModal').modal('hide');
+            $('#bookingModal').modal('show');
+        });
+    </script>
+</body>
+</html>
