@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-learning Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .dark-theme {
+            background-color: #343a40;
+            color: white;
+        }
+        .course-card {
+            transition: transform 0.3s;
+        }
+        .course-card:hover {
+            transform: scale(1.05);
+        }
+        .login-error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white p-3">
+        <div class="container">
+            <h1>E-learning Portal</h1>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mt-4">
+        <h2>Featured Courses</h2>
+        <div class="row" id="course-container">
+            <div class="col-md-4">
+                <div class="card course-card">
+                    &lt;img src="https://via.placeholder.com/300" class="card-img-top" alt="Course 1"&gt;
+                    <div class="card-body">
+                        <h5 class="card-title">Course 1</h5>
+                        <p class="card-text">Learn the basics of programming.</p>
+                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card">
+                    &lt;img src="https://via.placeholder.com/300" class="card-img-top" alt="Course 2"&gt;
+                    <div class="card-body">
+                        <h5 class="card-title">Course 2</h5>
+                        <p class="card-text">Advanced topics in web development.</p>
+                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card">
+                    &lt;img src="https://via.placeholder.com/300" class="card-img-top" alt="Course 3"&gt;
+                    <div class="card-body">
+                        <h5 class="card-title">Course 3</h5>
+                        <p class="card-text">Data science and machine learning.</p>
+                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light text-center p-3 mt-4">
+        <p>&copy; 2025 E-learning Portal. All rights reserved.</p>
+    </footer>
+
+    <div class="container mt-4">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="login-error" id="login-error">Invalid username or password.</div>
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animate featured courses
+            $('#course-container').hide().slideDown(1000);
+
+            // Handle login form submission
+            $('#login-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                const username = $('#username').val();
+                const password = $('#password').val();
+
+                // Simple validation (for demonstration purposes)
+                if (username === 'user' && password === 'pass') {
+                    alert('Login successful!');
+                    $('#login-error').hide();
+                } else {
+                    $('#login-error').show();
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
