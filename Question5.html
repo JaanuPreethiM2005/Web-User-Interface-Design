@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+        }
+        section {
+            padding: 60px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--secondary);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+        }
+        .project-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            background: white;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .project-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .clock {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+        }
+        .greeting {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--secondary);
+            text-align: center;
+            margin: 20px 0;
+        }
+        footer {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: var(--radius) var(--radius) 0 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+            .project-card img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">My Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home" class="text-center">
+        <div class="container">
+            <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img mb-3">
+            <h1>John Doe</h1>
+            <p class="lead">Web Developer & Designer</p>
+            <div class="clock"></div>
+            <div class="greeting"></div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>Hello! I'm John, a passionate web developer with over 5 years of experience in building responsive, user-friendly websites and web applications. I specialize in front-end technologies like HTML5, CSS3, JavaScript, and modern frameworks.</p>
+                    <p>When I'm not coding, you can find me hiking, reading, or experimenting with new tech.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h4>My Skills</h4>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">HTML5</div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">CSS3</div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">JavaScript</div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">React</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="row" id="projectsRow">
+                <!-- Projects loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Modal -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModalLabel">Project Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="projectDetails">
+                    <!-- Details loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form class="contact-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample project data
+        const projects = [
+            {
+                title: "E-commerce Website",
+                image: "https://via.placeholder.com/600x400?text=E-commerce",
+                description: "A fully responsive e-commerce platform built with React and Node.js, featuring user authentication, product management, and payment integration.",
+                technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+                link: "#"
+            },
+            {
+                title: "Portfolio Template",
+                image: "https://via.placeholder.com/600x400?text=Portfolio",
+                description: "A customizable portfolio template for creatives, built with HTML5, CSS3, and JavaScript, with smooth animations and responsive design.",
+                technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
+                link: "#"
+            },
+            {
+                title: "Weather App",
+                image: "https://via.placeholder.com/600x400?text=Weather+App",
+                description: "A real-time weather application using the OpenWeather API, with location-based forecasts and interactive UI.",
+                technologies: ["JavaScript", "API", "CSS3", "Bootstrap"],
+                link: "#"
+            }
+        ];
+
+        // Load projects on page load
+        $(document).ready(function() {
+            loadProjects(projects);
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateGreeting();
+            // Smooth scrolling for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top - 70
+                }, 500);
+            });
+            // Handle project card clicks
+            $(document).on('click', '.view-project', function() {
+                const project = JSON.parse($(this).data('project'));
+                $('#projectDetails').html(`
+                    <img src="${project.image}" class="img-fluid mb-3" alt="${project.title}">
+                    <h5>${project.title}</h5>
+                    <p>${project.description}</p>
+                    <p><strong>Technologies:</strong> ${project.technologies.join(', ')}</p>
+                    <a href="${project.link}" class="btn btn-primary" target="_blank">View Project</a>
+                `);
+                $('#projectModal').modal('show');
+            });
+        });
+
+        // Load projects dynamically
+        function loadProjects(projectList) {
+            const row = $('#projectsRow');
+            row.empty();
+            projectList.forEach(project => {
+                row.append(`
+                    <div class="col-md-4">
+                        <div class="card project-card">
+                            <img src="${project.image}" class="card-img-top" alt="${project.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${project.title}</h5>
+                                <p class="card-text">${project.description.substring(0, 100)}...</p>
+                                <button class="btn btn-info view-project" data-project='${JSON.stringify(project)}'>View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        // Update live clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            $('.clock').text(timeString);
+        }
+
+        // Update greeting based on time
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting;
+            if (hour < 12) greeting = "Good Morning!";
+            else if (hour < 18) greeting = "Good Afternoon!";
+            else greeting = "Good Evening!";
+            $('.greeting').text(greeting);
+        }
+    </script>
+</body>
+</html>
